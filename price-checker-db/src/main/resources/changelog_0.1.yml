@@ -1,0 +1,67 @@
+databaseChangeLog:
+
+  - changeSet:
+      id: create_good_and_request_tables
+      author: Sergei_Russov
+      preConditions:
+        - preCondition:
+            onFail: MARK_RAN
+            not:
+              tableExists:
+                tableName: good
+        - preCondition:
+            onFail: MARK_RAN
+            not:
+              tableExists:
+                tableName: request
+      changes:
+        - createTable:
+            tableName: good
+            remarks: Goods
+            columns:
+              - column:
+                  name: id
+                  type: UUID
+                  autoIncrement: false
+                  constraints:
+                    primaryKey: true
+                    primaryKeyName: good_id_pk
+                    nullable: false
+              - column:
+                  name: name
+                  type: varchar(256)
+                  remarks: Name of good
+                  constraints:
+                    nullable: false
+              - column:
+                  name: url
+                  type: varchar(512)
+                  constraints:
+                    nullable: false
+        - createTable:
+            tableName: request
+            remarks: Requests
+            columns:
+              - column:
+                  name: id
+                  type: UUID
+                  autoIncrement: false
+                  constraints:
+                    primaryKey: true
+                    primaryKeyName: request_id_pk
+                    nullable: false
+              - column:
+                  name: request_datetime
+                  type: timestamptz
+                  constraints:
+                    nullable: false
+              - column:
+                  name: price
+                  type: numeric
+                  constraints:
+                    nullable: false
+              - column:
+                  name: good_id
+                  type: uuid
+                  constraints:
+                    nullable: false
