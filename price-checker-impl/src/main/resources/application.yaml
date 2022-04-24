@@ -3,7 +3,7 @@ server.port: 8080
 spring:
   datasource:
     driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://localhost:5432:price_checker
+    url: jdbc:postgresql://localhost:5432/price_checker
     username: price_checker
     password: price_checker
   jpa:
@@ -11,8 +11,8 @@ spring:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQL95Dialect
         show_sql: false
-  liquibase:
-    change-log: classpath:liquibase/changelog.yml
-    url: jdbc:postgresql://localhost:5432:price_checker
-    user: check_price
-    password: check_price
+  liquibase.enabled: false
+
+logging:
+  level:
+    ru.apostasyx: DEBUG
